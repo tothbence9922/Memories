@@ -16,7 +16,7 @@ interface MemoryDAO {
     suspend fun insertMemories(vararg memory: Memory): List<Long>
 
     @Insert
-    suspend fun insertMemoriesList(cities: List<Memory>): List<Long>
+    suspend fun insertMemoriesList(memories: List<Memory>): List<Long>
 
     @Delete
     suspend fun deleteMemory(memory: Memory)

@@ -16,7 +16,7 @@ interface ImageDAO {
     suspend fun insertImages(vararg image: Image): List<Long>
 
     @Insert
-    suspend fun insertImagesList(cities: List<Image>): List<Long>
+    suspend fun insertImagesList(images: List<Image>): List<Long>
 
     @Delete
     suspend fun deleteImage(image: Image)

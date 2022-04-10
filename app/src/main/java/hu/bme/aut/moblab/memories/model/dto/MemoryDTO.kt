@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class MemoryDTO (
-    val memoryId: Int?,
+    val memoryId: Long?,
     val title: String?,
     val description: String?,
     val imageUrls: ArrayList<ImageDTO>?
