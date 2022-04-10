@@ -10,7 +10,7 @@ interface ImageDAO {
     fun getAllImages(): LiveData<List<Image>>
 
     @Insert
-    suspend fun insertImage(image: Image) : Long
+    suspend fun insertImage(image: Image): Long
 
     @Insert
     suspend fun insertImages(vararg image: Image): List<Long>
@@ -19,10 +19,10 @@ interface ImageDAO {
     suspend fun insertImagesList(images: List<Image>): List<Long>
 
     @Delete
-    suspend fun deleteImage(image: Image)
+    suspend fun deleteImage(image: Image): Int
 
     @Query("DELETE FROM image")
-    suspend fun deleteAllImage()
+    suspend fun deleteAllImage(): Int
 
     @Update
     suspend fun updateImage(image: Image)

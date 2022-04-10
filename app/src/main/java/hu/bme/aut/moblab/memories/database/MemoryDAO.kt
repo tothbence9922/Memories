@@ -10,7 +10,7 @@ interface MemoryDAO {
     fun getAllMemories(): LiveData<List<Memory>>
 
     @Insert
-    suspend fun insertMemory(memory: Memory) : Long
+    suspend fun insertMemory(memory: Memory): Long
 
     @Insert
     suspend fun insertMemories(vararg memory: Memory): List<Long>
@@ -19,10 +19,10 @@ interface MemoryDAO {
     suspend fun insertMemoriesList(memories: List<Memory>): List<Long>
 
     @Delete
-    suspend fun deleteMemory(memory: Memory)
+    suspend fun deleteMemory(memory: Memory): Int
 
     @Query("DELETE FROM memory")
-    suspend fun deleteAllMemory()
+    suspend fun deleteAllMemory(): Int
 
     @Update
     suspend fun updateMemory(memory: Memory)
