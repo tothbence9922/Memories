@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "memory")
 data class Memory(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     @ColumnInfo(name="memoryId", index = true)
-    var memoryId: String?,
+    var memoryId: String,
     var title: String,
     var description: String,
+    var imageUrls: String
 )

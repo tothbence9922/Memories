@@ -16,7 +16,7 @@ import hu.bme.aut.moblab.memories.view.memory.MemoryDetailsActivity
 import hu.bme.aut.moblab.memories.viewmodel.MemoriesViewModel
 
 class MemoryAdapter(private val context: Context,
-                  private val citiesViewModel: MemoriesViewModel
+                  private val memoriesViewModel: MemoriesViewModel
 ) : ListAdapter<Memory, MemoryAdapter.ViewHolder>(MemoryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,7 +34,7 @@ class MemoryAdapter(private val context: Context,
     }
 
     fun deleteMemory(memory: Memory) {
-        citiesViewModel.delete(memory)
+        memoriesViewModel.delete(memory)
     }
 
     fun showDetails(memory: Memory) {

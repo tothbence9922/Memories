@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import hu.bme.aut.moblab.memories.model.db.Memory
 
-@Database(entities = [Memory::class], version = 1, exportSchema = false)
+@Database(entities = [Memory::class], version = 10, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun memoryDao(): MemoryDAO

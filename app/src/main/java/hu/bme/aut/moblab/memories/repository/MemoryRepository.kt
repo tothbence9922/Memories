@@ -6,7 +6,7 @@ import hu.bme.aut.moblab.memories.model.db.Memory
 
 class MemoryRepository(private val memoryDao: MemoryDAO) {
 
-    suspend fun getAllMemories(): List<Memory> {
+    fun getAllMemories(): LiveData<List<Memory>> {
         return memoryDao.getAllMemories()
     }
 
