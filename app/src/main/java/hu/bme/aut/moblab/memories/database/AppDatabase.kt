@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import hu.bme.aut.moblab.memories.model.db.Image
 import hu.bme.aut.moblab.memories.model.db.Memory
 
-@Database(entities = [Memory::class, Image::class], version = 1, exportSchema = false)
+@Database(entities = [Memory::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun memoryDao(): MemoryDAO
-    abstract fun imageDao(): ImageDAO
 
     companion object {
         @Volatile

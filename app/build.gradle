@@ -3,6 +3,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+Properties localProps = new Properties()
+if (project.rootProject.file('key.properties').canRead()) {
+    localProps.load(new FileInputStream(project.rootProject.file('key.properties')))
+} else {
+    System.err.println("key.properties file is missing, please create it.")
+}
 
 android {
     compileSdk 31
@@ -15,6 +25,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'API_KEY', "\"" + localProps['api.key'] + "\""
+
     }
 
     buildTypes {
@@ -30,37 +42,55 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
+
 }
 
 dependencies {
-    def moshi_version = '1.9.2'
+    def moshi_version = '1.12.0'
     def retrofit_version = '2.8.1'
-    def arch_version = '2.2.0'
-    def room_version = '2.4.2'
+    def glide_version = '4.8.0'
+    def room_version = '2.3.0'
+    def archVersion = '2.2.0'
+    def coroutines = '1.3.4'
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.room:room-common:2.3.0'
-    implementation 'androidx.room:room-ktx:2.3.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.databinding:databinding-runtime:4.2.2'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Dialogs
+    implementation 'com.afollestad.material-dialogs:input:3.3.0'
 
     // Networking
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.moshi:moshi:$moshi_version"
-
-    // Arch components
-    implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$arch_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
-    implementation "androidx.activity:activity-ktx:1.1.0"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Database
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Arch components
+    implementation "androidx.lifecycle:lifecycle-extensions:$archVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archVersion"
+    implementation "androidx.activity:activity-ktx:1.1.0"
+
+
+    // Coroutines
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 }

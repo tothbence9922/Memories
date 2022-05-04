@@ -13,9 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initRecyclerView()
     }
 
-    private fun initRecyclerView() {
-    }
 }

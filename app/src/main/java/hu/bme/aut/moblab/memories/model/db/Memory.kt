@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Memory(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="memoryId", index = true)
-    var memoryId: Long?,
+    var memoryId: String?,
     var title: String,
     var description: String,
 )
