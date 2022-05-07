@@ -1,32 +1,65 @@
 package hu.bme.aut.moblab.memories.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import hu.bme.aut.moblab.memories.database.AppDatabase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.bme.aut.moblab.memories.bl.offline.DeleteMemoryUseCase
+import hu.bme.aut.moblab.memories.bl.offline.GetMemoriesUseCase
+import hu.bme.aut.moblab.memories.bl.online.RetrofitDeleteMemoryUseCase
+import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemoriesUseCase
 import hu.bme.aut.moblab.memories.model.db.Memory
-import hu.bme.aut.moblab.memories.repository.MemoryRepository
-import kotlinx.coroutines.Dispatchers
+import hu.bme.aut.moblab.memories.model.db.toDto
+import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
+import hu.bme.aut.moblab.memories.model.dto.toMemory
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MemoriesViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class MemoriesViewModel @Inject constructor(
+    private val getMemoriesUseCase: GetMemoriesUseCase,
+    private val deleteMemoryUseCase: DeleteMemoryUseCase,
+    private val retrofitGetMemoriesUseCase: RetrofitGetMemoriesUseCase,
+    private val retrofitDeleteMemoryUseCase: RetrofitDeleteMemoryUseCase
+) : ViewModel() {
 
-    private val repository: MemoryRepository
-    val allMemories: LiveData<List<Memory>>
+    val memories = MutableLiveData(emptyList<MemoryDTO>())
+    private val isOnline = MutableLiveData(false)
 
     init {
-        val memoriesDao = AppDatabase.getInstance(application).memoryDao()
-        repository = MemoryRepository(memoriesDao)
-        allMemories = repository.getAllMemories()
+        getAllMemories()
     }
 
-    fun insert(memory: Memory) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(memory)
+    fun toggleOnline() {
+        viewModelScope.launch {
+            isOnline.value = !isOnline.value!!
+            getAllMemories()
+        }
+        Log.v("TAG", "TOGGLED TO: ${isOnline.value}")
     }
 
-    fun delete(memory: Memory) = viewModelScope.launch(Dispatchers.IO) {
-        repository.delete(memory)
+    fun getAllMemories() {
+        viewModelScope.launch {
+            if (isOnline.value == false) {
+                memories.value = getMemoriesUseCase.invoke().map { it.toDto() }
+            } else {
+                memories.value = retrofitGetMemoriesUseCase.invoke()
+            }
+        }
+        Log.v("TAG", "getAllMemories called")
+
     }
 
+    fun delete(memoryDTO: MemoryDTO) {
+
+        viewModelScope.launch {
+            if (isOnline.value == false) {
+                deleteMemoryUseCase.invoke(memoryDTO.toMemory())
+            } else {
+                retrofitDeleteMemoryUseCase.invoke(memoryDTO)
+            }
+            getAllMemories()
+        }
+    }
 }

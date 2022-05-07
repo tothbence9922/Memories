@@ -6,16 +6,19 @@ import retrofit2.http.*
 
 interface MemoriesAPI {
 
-    @POST("/memory")
-    fun createMemory(@Body memoryDto: MemoryDTO): Call<MemoryDTO>
+    @POST("memories")
+    suspend fun createMemory(@Body memoryDto: MemoryDTO): MemoryDTO
 
-    @GET("/memory")
-    fun getMemories(): Call<MemoryDTO>
+    @GET("memories")
+    suspend fun getMemories(): List<MemoryDTO>
 
-    @GET("/memory")
-    fun getMemoryById(@Query("id") memoryId: String): Call<MemoryDTO>
+    @GET("memories/{id}")
+    suspend fun getMemoryById(@Path("id") id: String): MemoryDTO
 
-    @PUT("/memory")
-    fun updateMemory(@Body memoryDto: MemoryDTO): Call<MemoryDTO>
+    @PUT("memories/{id}")
+    suspend fun updateMemory(@Path("id") id: String, @Body memoryDto: MemoryDTO): MemoryDTO
+
+    @DELETE("memories/{id}")
+    suspend fun deleteMemory(@Path("id") id: String)
 
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/memories">
+
+    <fragment
+        android:id="@+id/memories"
+        android:name="hu.bme.aut.moblab.memories.view.memories.MemoriesFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_memories">
+        <action
+            android:id="@+id/action_to_memory_details"
+            app:destination="@id/memory_details" />
+        <action
+            android:id="@+id/action_to_add_memory"
+            app:destination="@id/add_memory" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/memory_details"
+        android:name="hu.bme.aut.moblab.memories.view.memory.MemoryDetailsFragment"
+        android:label="Memory details"
+        tools:layout="@layout/fragment_memory_details">
+
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_memory"
+        android:name="hu.bme.aut.moblab.memories.view.memory.AddMemoryFragment"
+        android:label="Add memory"
+        tools:layout="@layout/fragment_add_memory">
+    </fragment>
+
+</navigation>

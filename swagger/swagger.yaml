@@ -1,0 +1,243 @@
+swagger: "2.0"
+info:
+  description: "This is an assignment of the subject Mobile Software Systems (find out more on the following link: https://www.aut.bme.hu/Course/VIAUMB01)"
+  version: "1.0.0"
+  title: "Memories"
+  termsOfService: "None"
+  contact:
+    email: "tothbence9922@gmail.com"
+  license:
+    name: "MIT License"
+    url: "https://choosealicense.com/licenses/mit/"
+host: "localhost"
+basePath: "/v1"
+tags:
+- name: "memory"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "https"
+- "http"
+paths:
+  /memory:
+    post:
+      tags:
+      - "memory"
+      summary: "Add a new memory to the existing ones."
+      description: ""
+      operationId: "addMemory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Object of the Memory to be posted."
+        required: true
+        schema:
+          $ref: "#/definitions/Memory"
+      responses:
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+      - "memory"
+      summary: "Update an existing memory"
+      description: ""
+      operationId: "updateMemory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Memory object that needs to be updated."
+        required: true
+        schema:
+          $ref: "#/definitions/Memory"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Memory not found"
+        "405":
+          description: "Validation exception"
+  /memory/{memoryId}:
+    get:
+      tags:
+      - "memory"
+      summary: "Find memory by ID"
+      description: "Returns a single memory"
+      operationId: "getMemoryById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "memoryId"
+        in: "path"
+        description: "ID of memory to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Memory"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Memory not found"
+      security:
+      - api_key: []
+    put:
+      tags:
+      - "memory"
+      summary: "Updates a memory in the database with form data"
+      description: ""
+      operationId: "updateMemoryWithForm"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "memoryId"
+        in: "path"
+        description: "ID of memory that needs to be updated"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "Title"
+        in: "formData"
+        description: "Updated title of the memory"
+        required: false
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "Updated description of the memory"
+        required: false
+        type: "string"
+      responses:
+        "405":
+          description: "Invalid input"
+    delete:
+      tags:
+      - "memory"
+      summary: "Deletes a memory"
+      description: ""
+      operationId: "deleteMemory"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "api_key"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "memoryId"
+        in: "path"
+        description: "Memory id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Memory not found"
+  /memory/{memoryId}/image:
+    post:
+      tags:
+      - "memory"
+      summary: "Uploads an image to an existing memory"
+      description: ""
+      operationId: "uploadImage"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "memoryId"
+        in: "path"
+        description: "ID of memory to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "additionalMetadata"
+        in: "formData"
+        description: "Additional data to pass to server"
+        required: false
+        type: "string"
+      - name: "file"
+        in: "formData"
+        description: "file to upload"
+        required: false
+        type: "file"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Image:
+    type: "object"
+    properties:
+      imageId:
+        type: "integer"
+        format: "int64"
+      memoryId:
+        type: "integer"
+        format: "int64"
+      url:
+        type: "string"
+    xml:
+      name: "Image"
+  Memory:
+    type: "object"
+    properties:
+      memoryId:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "string"
+        format: "date-time"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      images:
+        type: "array"
+        xml:
+          name: "image"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Image"
+    xml:
+      name: "Memory"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger :)"
+  url: "http://swagger.io"

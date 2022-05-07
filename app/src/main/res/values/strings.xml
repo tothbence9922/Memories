@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">Memories</string>
 
-    <string name="title_memory_add_dialog">Add City Name</string>
+    <string name="title_memory_add_dialog">Add a memory</string>
     <string name="btn_add">Add</string>
     <string name="error_empty_field">This field is required</string>
     <string name="btn_dismiss">Dismiss</string>
+    <string name="action_button">+</string>
+    <string name="del">DEL</string>
+    <string name="add_a_new_memory">Add a new memory</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="add">Save locally</string>
+    <string name="back">Back</string>
+    <string name="online">Online</string>
+    <string name="add_retrofit">Save to cloud</string>
+    <string name="title_of_the_memory">Title of the memory</string>
+    <string name="description_of_the_memory">Description of the memory</string>
 </resources>

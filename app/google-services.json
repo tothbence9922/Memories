@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1014672222695",
+    "project_id": "memories-3d5e8",
+    "storage_bucket": "memories-3d5e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014672222695:android:f15cc445c858c07c873542",
+        "android_client_info": {
+          "package_name": "hu.bme.aut.moblab.memories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014672222695-nc83r4fc9k7b4tjq3oege0hc47fn7opg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8SEopPvOIaksDOuE4RPVltOMcVpPI5PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014672222695-nc83r4fc9k7b4tjq3oege0hc47fn7opg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,15 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hu.bme.aut.moblab.memories">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Memories" >
+        android:theme="@style/AppTheme"
+        android:name=".MemoriesApp">
     <activity
-        android:name=".view.memories.MainActivity"
+        android:name=".view.MainActivity"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar"
         android:exported="true">
@@ -20,7 +23,6 @@
         </intent-filter>
     </activity>
 
-    <activity android:name=".view.memory.MemoryDetailsActivity"/>
     </application>
 
 </manifest>

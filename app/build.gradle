@@ -65,6 +65,9 @@ dependencies {
     // Dialogs
     implementation 'com.afollestad.material-dialogs:input:3.3.0'
 
+    // RecyclerView swipe to refresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
     // Navigation
     def nav_version = "2.4.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -79,6 +82,7 @@ dependencies {
     def moshi_version = "1.13.0"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
     // Retrofit - Networking
     def retrofit_version = "2.9.0"
@@ -110,4 +114,6 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.7.3"
 
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
+
+
 }
