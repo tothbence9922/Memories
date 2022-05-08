@@ -14,13 +14,27 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:paddingHorizontal="16dp">
+
+        <Button
+            android:id="@+id/btAddImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_image"
+            app:layout_constraintBottom_toTopOf="@+id/btRetrofitAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etMemoryDescription" />
 
         <TextView
             android:id="@+id/tvModalTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:padding="10dp"
             android:text="@string/add_a_new_memory"
             android:textAlignment="center"
             android:textSize="22sp"
@@ -34,18 +48,25 @@
             android:text="@string/title_of_the_memory"
             app:layout_constraintBottom_toTopOf="@+id/etMemoryTitle"
             app:layout_constraintStart_toStartOf="@+id/etMemoryTitle" />
+
         <EditText
             android:id="@+id/etMemoryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:autofillHints="Title"
+            android:background="@color/white"
             android:ems="10"
             android:inputType="text"
+            android:padding="10sp"
+
             android:text="@={viewModel.title}"
-            app:layout_constraintBottom_toTopOf="@+id/etMemoryDescription"
+            android:textSize="22sp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvModalTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvModalTitle"
+            tools:text="@tools:sample/first_names" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,66 +74,58 @@
             android:text="@string/description_of_the_memory"
             app:layout_constraintBottom_toTopOf="@+id/etMemoryDescription"
             app:layout_constraintStart_toStartOf="@+id/etMemoryDescription" />
+
+
         <EditText
             android:id="@+id/etMemoryDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:autofillHints="Description"
+            android:background="@color/white"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
-            android:maxLines="10"
-            android:minLines="5"
+            android:lines="12"
+            android:padding="10sp"
             android:text="@={viewModel.description}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvModalTitle"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintTop_toBottomOf="@+id/etMemoryTitle"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:text="@tools:sample/lorem/random" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btDismiss"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:weightSum="2"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/back"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btDismiss"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/back" />
+        <Button
+            android:id="@+id/btAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add" />
-
-                <Button
-                    android:id="@+id/btRetrofitAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_retrofit" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </LinearLayout>
+        <Button
+            android:id="@+id/btRetrofitAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_retrofit"
+            app:layout_constraintBottom_toTopOf="@+id/btAdd"
+            app:layout_constraintEnd_toEndOf="@+id/btAdd"
+            app:layout_constraintStart_toStartOf="@+id/btAdd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -25,7 +25,8 @@ class MemoriesViewModel @Inject constructor(
 ) : ViewModel() {
 
     val memories = MutableLiveData(emptyList<MemoryDTO>())
-    private val isOnline = MutableLiveData(false)
+    val isOnline = MutableLiveData(false)
+    var state = MutableLiveData("Local memories")
 
     init {
         getAllMemories()
@@ -34,6 +35,11 @@ class MemoriesViewModel @Inject constructor(
     fun toggleOnline() {
         viewModelScope.launch {
             isOnline.value = !isOnline.value!!
+            if (isOnline.value!!){
+                state.value = "Online memories"
+            } else {
+                state.value = "Local memories"
+            }
             getAllMemories()
         }
         Log.v("TAG", "TOGGLED TO: ${isOnline.value}")

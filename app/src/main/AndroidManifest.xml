@@ -3,6 +3,7 @@
     package="hu.bme.aut.moblab.memories">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".MemoriesApp">
+        android:name=".MemoriesApp"
+        android:requestLegacyExternalStorage="true"
+        >
     <activity
         android:name=".view.MainActivity"
         android:label="@string/app_name"

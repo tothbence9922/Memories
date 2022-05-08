@@ -1,11 +1,15 @@
 package hu.bme.aut.moblab.memories.view.memories.adapter
 
 import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import hu.bme.aut.moblab.memories.databinding.MemoryRowBinding
 import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
@@ -24,16 +28,30 @@ class MemoriesAdapter(
         fun bind(memory: MemoryDTO) {
             binding.memoryDTO = memory
             binding.item.setOnClickListener { navigate(memory) }
+
+            if (memory.imageUrls.isNullOrEmpty()) {
+                Log.d("IMG_PATH", "IMG_PATH EMPTY")
+            } else {
+                Picasso.get().load("file:" + memory.imageUrls)
+                    .into(binding.ivMemoryImage)
+
+                Log.d("IMG_PATH", "IMG_PATH IS: ${memory.imageUrls}")
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemoryViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context,)
-        return MemoryViewHolder(MemoryRowBinding.inflate(layoutInflater, parent, false), navigate, delete)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return MemoryViewHolder(
+            MemoryRowBinding.inflate(layoutInflater, parent, false),
+            navigate,
+            delete
+        )
     }
 
     override fun onBindViewHolder(holder: MemoryViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 }
 
