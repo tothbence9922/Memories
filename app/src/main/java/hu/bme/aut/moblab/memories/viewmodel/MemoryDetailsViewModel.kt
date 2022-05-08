@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.moblab.memories.bl.offline.GetMemoryByIdUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemoryByIdUseCase
+import hu.bme.aut.moblab.memories.bl.offline.GetMemoryById
+import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemoryById
 import hu.bme.aut.moblab.memories.model.db.toDto
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 import kotlinx.coroutines.launch
@@ -16,14 +16,14 @@ import javax.inject.Inject
 @HiltViewModel
 class MemoryDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getMemoryByIdUseCase: GetMemoryByIdUseCase,
-    private val retrofitGetMemoryByIdUseCase: RetrofitGetMemoryByIdUseCase,
+    private val getMemoryById: GetMemoryById,
+    private val retrofitGetMemoryById: RetrofitGetMemoryById,
 ) : ViewModel() {
 
     val id = savedStateHandle.get<String>("id")!!
     val isOnline = savedStateHandle.get<Boolean>("isOnline")!!
 
-    val memory = MutableLiveData<MemoryDTO>()
+    val memory = MutableLiveData<MemoryDTO?>()
 
     init {
         getMemoryById()
@@ -32,9 +32,9 @@ class MemoryDetailsViewModel @Inject constructor(
     private fun getMemoryById() {
         viewModelScope.launch {
             if (!isOnline) {
-                memory.value = getMemoryByIdUseCase(id)!!.toDto()
+                memory.value = getMemoryById(id).toDto()
             } else {
-                memory.value = retrofitGetMemoryByIdUseCase(id)!!
+                memory.value = retrofitGetMemoryById(id)
             }
             Log.v("MemoryDetailsViewModel", memory.value.toString())
         }

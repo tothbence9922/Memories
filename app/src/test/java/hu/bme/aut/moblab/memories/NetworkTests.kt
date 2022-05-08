@@ -1,4 +1,4 @@
-package hu.bme.aut.moblab.memories.tests.unit.network
+package hu.bme.aut.moblab.memories
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

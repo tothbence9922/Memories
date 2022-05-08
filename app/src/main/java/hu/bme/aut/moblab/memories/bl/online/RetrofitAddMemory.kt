@@ -5,7 +5,7 @@ import hu.bme.aut.moblab.memories.model.db.toDto
 import hu.bme.aut.moblab.memories.repository.MemoryRetrofitRepository
 import javax.inject.Inject
 
-class RetrofitAddMemoryUseCase @Inject constructor(
+class RetrofitAddMemory @Inject constructor(
     private val memoryRepository: MemoryRetrofitRepository
 ) {
 

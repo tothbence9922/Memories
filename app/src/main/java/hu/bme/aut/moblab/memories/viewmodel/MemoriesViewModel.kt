@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.moblab.memories.bl.offline.DeleteMemoryUseCase
-import hu.bme.aut.moblab.memories.bl.offline.GetMemoriesUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitDeleteMemoryUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemoriesUseCase
+import hu.bme.aut.moblab.memories.bl.offline.DeleteMemory
+import hu.bme.aut.moblab.memories.bl.offline.GetMemories
+import hu.bme.aut.moblab.memories.bl.online.RetrofitDeleteMemory
+import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemories
 import hu.bme.aut.moblab.memories.model.db.toDto
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 import hu.bme.aut.moblab.memories.model.dto.toMemory
@@ -17,10 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MemoriesViewModel @Inject constructor(
-    private val getMemoriesUseCase: GetMemoriesUseCase,
-    private val deleteMemoryUseCase: DeleteMemoryUseCase,
-    private val retrofitGetMemoriesUseCase: RetrofitGetMemoriesUseCase,
-    private val retrofitDeleteMemoryUseCase: RetrofitDeleteMemoryUseCase
+    private val getMemories: GetMemories,
+    private val deleteMemory: DeleteMemory,
+    private val retrofitGetMemories: RetrofitGetMemories,
+    private val retrofitDeleteMemory: RetrofitDeleteMemory
 ) : ViewModel() {
 
     val memories = MutableLiveData(emptyList<MemoryDTO>())
@@ -47,9 +47,9 @@ class MemoriesViewModel @Inject constructor(
     fun getAllMemories() {
         viewModelScope.launch {
             if (isOnline.value == false) {
-                memories.value = getMemoriesUseCase.invoke().map { it.toDto() }
+                memories.value = getMemories.invoke().map { it.toDto() }
             } else {
-                memories.value = retrofitGetMemoriesUseCase.invoke()
+                memories.value = retrofitGetMemories.invoke()
             }
         }
         Log.v("TAG", "getAllMemories called")
@@ -60,9 +60,9 @@ class MemoriesViewModel @Inject constructor(
 
         viewModelScope.launch {
             if (isOnline.value == false) {
-                deleteMemoryUseCase.invoke(memoryDTO.toMemory())
+                deleteMemory.invoke(memoryDTO.toMemory())
             } else {
-                retrofitDeleteMemoryUseCase.invoke(memoryDTO)
+                retrofitDeleteMemory.invoke(memoryDTO)
             }
             getAllMemories()
         }

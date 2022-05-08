@@ -72,7 +72,7 @@ class EditMemoryFragment : Fragment() {
             contentUri?.let { requireActivity().contentResolver.query(it, proj, null, null, null) }
         val column_index: Int? = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         cursor?.moveToFirst()
-        return column_index?.let { cursor?.getString(it) }
+        return column_index?.let { cursor.getString(it) }
     }
 
 }

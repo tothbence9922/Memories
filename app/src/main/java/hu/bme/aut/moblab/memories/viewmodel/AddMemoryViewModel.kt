@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.moblab.memories.bl.offline.AddMemoryUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitAddMemoryUseCase
+import hu.bme.aut.moblab.memories.bl.offline.AddMemory
+import hu.bme.aut.moblab.memories.bl.online.RetrofitAddMemory
 import hu.bme.aut.moblab.memories.model.db.Memory
 import kotlinx.coroutines.launch
 import java.io.File
@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddMemoryViewModel @Inject constructor(
-    private val addMemoryUseCase: AddMemoryUseCase,
-    private val retrofitAddMemoryUseCase: RetrofitAddMemoryUseCase,
+    private val addMemory: AddMemory,
+    private val retrofitAddMemory: RetrofitAddMemory,
 ) : ViewModel() {
     val title = MutableLiveData<String>("")
     val description = MutableLiveData<String>("")
@@ -45,7 +45,7 @@ class AddMemoryViewModel @Inject constructor(
             getDate(Date().time)
         )
         viewModelScope.launch {
-            addMemoryUseCase.invoke(newMemory)
+            addMemory.invoke(newMemory)
         }
     }
 
@@ -55,7 +55,6 @@ class AddMemoryViewModel @Inject constructor(
         val file = Uri.fromFile(File(imageUri.value.orEmpty()))
         val imageRef = storageRef.child("images/${file.lastPathSegment}")
         val uploadTask = imageRef.putFile(file)
-        var downloadUrl = ""
         uploadTask.addOnFailureListener {
         }.addOnSuccessListener { taskSnapshot ->
             Log.v("Upload metadata:", taskSnapshot.metadata.toString())
@@ -70,7 +69,7 @@ class AddMemoryViewModel @Inject constructor(
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
-                downloadUrl = downloadUri.toString()
+                var downloadUrl = downloadUri.toString()
                 val newMemory = Memory(
                     UUID.randomUUID().toString(),
                     title.value.orEmpty(),
@@ -79,7 +78,7 @@ class AddMemoryViewModel @Inject constructor(
                     getDate(Date().time)
                 )
                 viewModelScope.launch {
-                    retrofitAddMemoryUseCase.invoke(newMemory)
+                    retrofitAddMemory.invoke(newMemory)
                 }
             } else {
                 Log.w("Upload failure", "Upload unsuccessful.")

@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.moblab.memories.bl.offline.UpdateMemoryUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitUpdateMemoryUseCase
+import hu.bme.aut.moblab.memories.bl.offline.UpdateMemory
+import hu.bme.aut.moblab.memories.bl.online.RetrofitUpdateMemory
 import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 import kotlinx.coroutines.launch
@@ -20,8 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class EditMemoryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val updateMemoryUseCase: UpdateMemoryUseCase,
-    private val retrofitUpdateMemoryUseCase: RetrofitUpdateMemoryUseCase,
+    private val updateMemory: UpdateMemory,
+    private val retrofitUpdateMemory: RetrofitUpdateMemory,
 ) : ViewModel() {
 
     val id = savedStateHandle.get<String>("id")!!
@@ -57,7 +57,7 @@ class EditMemoryViewModel @Inject constructor(
             originalCreated
         )
         viewModelScope.launch {
-            updateMemoryUseCase.invoke(newMemory)
+            updateMemory.invoke(newMemory)
         }
     }
 
@@ -68,7 +68,6 @@ class EditMemoryViewModel @Inject constructor(
             val uri = Uri.fromFile(file)
             val imageRef = storageRef.child("images/${uri.lastPathSegment}")
             val uploadTask = imageRef.putFile(uri)
-            var downloadUrl = imageUri.value.orEmpty()
             uploadTask.addOnFailureListener {
             }.addOnSuccessListener { taskSnapshot ->
                 Log.v("Upload metadata:", taskSnapshot.metadata.toString())
@@ -83,7 +82,7 @@ class EditMemoryViewModel @Inject constructor(
             }.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val downloadUri = task.result
-                    downloadUrl = downloadUri.toString()
+                    val downloadUrl = downloadUri.toString()
                     val newMemory = MemoryDTO(
                         id,
                         originalMemoryId,
@@ -93,7 +92,7 @@ class EditMemoryViewModel @Inject constructor(
                         originalCreated
                     )
                     viewModelScope.launch {
-                        retrofitUpdateMemoryUseCase.invoke(newMemory)
+                        retrofitUpdateMemory.invoke(newMemory)
                     }
                 } else {
                     Log.w("Upload failure", "Upload unsuccessful.")
@@ -109,7 +108,7 @@ class EditMemoryViewModel @Inject constructor(
                 originalCreated
             )
             viewModelScope.launch {
-                retrofitUpdateMemoryUseCase.invoke(newMemory)
+                retrofitUpdateMemory.invoke(newMemory)
             }
         }
 

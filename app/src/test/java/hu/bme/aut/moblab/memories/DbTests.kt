@@ -1,4 +1,4 @@
-package hu.bme.aut.moblab.memories.tests.unit.db
+package hu.bme.aut.moblab.memories
 
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltAndroidTest
 @Config(application = HiltTestApplication::class)
 @RunWith(RobolectricTestRunner::class)
-class Tests {
+class DbTests {
 
     @get:Rule
     val hiltAndroidRule = HiltAndroidRule(this)

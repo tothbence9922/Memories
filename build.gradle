@@ -2,6 +2,7 @@
 
 
 buildscript {
+    ext.jacocoVersion = '0.8.4'
     repositories {
         // Check that you have the following line (if not, add it):
         google()  // Google's Maven repository
@@ -10,6 +11,7 @@ buildscript {
     dependencies {
         classpath 'com.google.gms:google-services:4.3.10'
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.29.1-alpha'
+        classpath "org.jacoco:org.jacoco.core:$jacocoVersion"
     }
 }
 
@@ -24,3 +26,6 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+

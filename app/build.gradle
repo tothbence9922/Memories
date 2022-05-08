@@ -4,19 +4,28 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'jacoco'
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'jacoco'
 
 Properties localProps = new Properties()
 if (project.rootProject.file('key.properties').canRead()) {
     localProps.load(new FileInputStream(project.rootProject.file('key.properties')))
 } else {
     System.err.println("key.properties file is missing, please create it.")
+}
+
+configurations.all{
+    resolutionStrategy {
+        eachDependency { details ->
+            if ('org.jacoco' == details.requested.group) {
+                details.useVersion "0.8.7"
+            }
+        }
+    }
 }
 
 android {
@@ -35,6 +44,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -59,6 +73,11 @@ android {
         dataBinding true
     }
 
+}
+
+jacoco {
+    toolVersion = '0.8.8'
+    testReportDirName = file("$buildDir/jacoco-reports")
 }
 
 dependencies {
