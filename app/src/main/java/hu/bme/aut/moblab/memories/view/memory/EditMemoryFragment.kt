@@ -16,17 +16,19 @@ import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.moblab.memories.R
 import hu.bme.aut.moblab.memories.databinding.FragmentAddMemoryBinding
+import hu.bme.aut.moblab.memories.databinding.FragmentEditMemoryBinding
 import hu.bme.aut.moblab.memories.databinding.FragmentMemoryDetailsBinding
 import hu.bme.aut.moblab.memories.viewmodel.AddMemoryViewModel
+import hu.bme.aut.moblab.memories.viewmodel.EditMemoryViewModel
 import hu.bme.aut.moblab.memories.viewmodel.MemoryDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_add_memory.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddMemoryFragment : Fragment() {
+class EditMemoryFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddMemoryBinding
-    private val viewModel: AddMemoryViewModel by viewModels()
+    private lateinit var binding: FragmentEditMemoryBinding
+    private val viewModel: EditMemoryViewModel by viewModels()
     private val PICK_IMAGE = 100
     private var imageUri: Uri? = null
 
@@ -35,7 +37,7 @@ class AddMemoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddMemoryBinding.inflate(inflater)
+        binding = FragmentEditMemoryBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -43,11 +45,11 @@ class AddMemoryFragment : Fragment() {
             view.findNavController().navigate(R.id.memories)
         }
         binding.btAdd.setOnClickListener { view ->
-            viewModel.addMemory()
-            view.findNavController().navigate(R.id.memories)
-        }
-        binding.btRetrofitAdd.setOnClickListener { view ->
-            viewModel.retrofitAddMemory()
+            if (viewModel.isOnline) {
+                viewModel.retrofitPutMemory()
+            } else {
+                viewModel.putMemory()
+            }
             view.findNavController().navigate(R.id.memories)
         }
 

@@ -11,9 +11,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.moblab.memories.databinding.FragmentMemoryDetailsBinding
+import hu.bme.aut.moblab.memories.view.memories.MemoriesFragmentDirections
 import hu.bme.aut.moblab.memories.viewmodel.MemoryDetailsViewModel
 
 @AndroidEntryPoint
@@ -36,18 +38,32 @@ class MemoryDetailsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         getPermissions()
 
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.fab.setOnClickListener {
+            findNavController().navigate(
+                MemoryDetailsFragmentDirections.actionToEditMemory(
+                    viewModel.id,
+                    viewModel.memory.value!!.memoryId,
+                    viewModel.isOnline,
+                    viewModel.memory.value!!.title,
+                    viewModel.memory.value!!.description,
+                    viewModel.memory.value!!.imageUrls,
+                    viewModel.memory.value!!.created,
+                )
+            )
+        }
+
         viewModel.memory.observe(viewLifecycleOwner) {
             if (viewModel.memory.value?.imageUrls.isNullOrEmpty()) {
                 Log.d("IMG_PATH", "IMG_PATH EMPTY")
             } else {
-                Picasso.get().load("file:" + viewModel.memory.value!!.imageUrls).into(binding.ivMemoryImage)
+                Picasso.get().load(viewModel.memory.value!!.imageUrls)
+                    .into(binding.ivMemoryImage)
 
                 Log.d("IMG_PATH", "IMG_PATH IS: ${viewModel.memory.value?.imageUrls}")
             }

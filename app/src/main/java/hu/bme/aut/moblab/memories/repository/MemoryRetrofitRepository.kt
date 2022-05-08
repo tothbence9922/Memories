@@ -27,6 +27,6 @@ class MemoryRetrofitRepository @Inject constructor(
     }
 
     suspend fun update(memory: MemoryDTO) {
-        memoriesAPI.updateMemory(memory._id!!, memory)
+        memoriesAPI.updateMemory(memory._id!!, MemoryDTO(null, memory.memoryId, memory.title, memory.description, memory.imageUrls, memory.created))
     }
 }

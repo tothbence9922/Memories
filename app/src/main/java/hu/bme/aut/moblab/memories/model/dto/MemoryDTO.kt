@@ -20,3 +20,4 @@ fun MemoryDTO.toMemory() = Memory(
     imageUrls = imageUrls,
     created = created
 )
+

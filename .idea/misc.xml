@@ -8,8 +8,9 @@
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/activity_main.xml" value="0.1962962962962963" />
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/activity_memory_details.xml" value="0.36614583333333334" />
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/fragment_add_memory.xml" value="0.33" />
+        <entry key="..\:/android_projects/Memories/app/src/main/res/layout/fragment_edit_memory.xml" value="0.36666666666666664" />
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/fragment_memories.xml" value="0.25" />
-        <entry key="..\:/android_projects/Memories/app/src/main/res/layout/fragment_memory_details.xml" value="0.1" />
+        <entry key="..\:/android_projects/Memories/app/src/main/res/layout/fragment_memory_details.xml" value="0.25" />
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/memory_row.xml" value="0.33" />
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/memory_row2.xml" value="0.25416666666666665" />
         <entry key="..\:/android_projects/Memories/app/src/main/res/layout/new_memory_dialog.xml" value="0.1" />

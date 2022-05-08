@@ -31,6 +31,10 @@
         <argument
             android:name="isOnline"
             app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_to_edit_memory"
+            app:destination="@id/edit_memory" />
     </fragment>
 
     <fragment
@@ -38,6 +42,34 @@
         android:name="hu.bme.aut.moblab.memories.view.memory.AddMemoryFragment"
         android:label="Add memory"
         tools:layout="@layout/fragment_add_memory">
+    </fragment>
+
+    <fragment
+        android:id="@+id/edit_memory"
+        android:name="hu.bme.aut.moblab.memories.view.memory.EditMemoryFragment"
+        android:label="Add memory"
+        tools:layout="@layout/fragment_edit_memory">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="memoryId"
+            app:argType="string" />
+        <argument
+            android:name="isOnline"
+            app:argType="boolean" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="imageUrls"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
     </fragment>
 
 </navigation>

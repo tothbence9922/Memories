@@ -16,7 +16,7 @@ interface MemoriesAPI {
     suspend fun getMemoryById(@Path("id") id: String): MemoryDTO
 
     @PUT("memories/{id}")
-    suspend fun updateMemory(@Path("id") id: String, @Body memoryDto: MemoryDTO): MemoryDTO
+    suspend fun updateMemory(@Path("id") id: String, @Body memoryDto: MemoryDTO)
 
     @DELETE("memories/{id}")
     suspend fun deleteMemory(@Path("id") id: String)

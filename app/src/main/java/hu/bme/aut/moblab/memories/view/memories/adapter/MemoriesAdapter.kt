@@ -32,7 +32,7 @@ class MemoriesAdapter(
             if (memory.imageUrls.isNullOrEmpty()) {
                 Log.d("IMG_PATH", "IMG_PATH EMPTY")
             } else {
-                Picasso.get().load("file:" + memory.imageUrls)
+                Picasso.get().load(memory.imageUrls)
                     .into(binding.ivMemoryImage)
 
                 Log.d("IMG_PATH", "IMG_PATH IS: ${memory.imageUrls}")

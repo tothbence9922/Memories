@@ -21,16 +21,16 @@ class MemoryDetailsViewModel @Inject constructor(
     private val retrofitGetMemoryByIdUseCase: RetrofitGetMemoryByIdUseCase,
 ) : ViewModel() {
 
-    private val id = savedStateHandle.get<String>("id")!!
-    private val isOnline = savedStateHandle.get<Boolean>("isOnline")!!
+    val id = savedStateHandle.get<String>("id")!!
+    val isOnline = savedStateHandle.get<Boolean>("isOnline")!!
 
     val memory = MutableLiveData<MemoryDTO>()
 
     init {
-        getMemory()
+        getMemoryById()
     }
 
-    private fun getMemory() {
+    private fun getMemoryById() {
         viewModelScope.launch {
             if (!isOnline) {
                 memory.value = getMemoryByIdUseCase(id)!!.toDto()

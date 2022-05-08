@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="hu.bme.aut.moblab.memories.viewmodel.AddMemoryViewModel" />
+            type="hu.bme.aut.moblab.memories.viewmodel.EditMemoryViewModel" />
 
     </data>
 
@@ -21,8 +21,7 @@
             android:id="@+id/btAddImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_image"
-            app:layout_constraintBottom_toTopOf="@+id/btRetrofitAdd"
+            android:text="@string/select_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etMemoryDescription" />
@@ -34,7 +33,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:padding="10dp"
-            android:text="@string/add_a_new_memory"
+            android:text="@string/edit_memory"
             android:textAlignment="center"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,18 +112,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/add"
+            android:text="@string/confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/btRetrofitAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_retrofit"
-            app:layout_constraintBottom_toTopOf="@+id/btAdd"
-            app:layout_constraintEnd_toEndOf="@+id/btAdd"
-            app:layout_constraintStart_toStartOf="@+id/btAdd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
