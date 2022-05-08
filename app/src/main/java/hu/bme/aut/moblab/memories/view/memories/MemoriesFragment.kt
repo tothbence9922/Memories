@@ -24,22 +24,23 @@ class MemoriesFragment : Fragment() {
     private lateinit var binding: FragmentMemoriesBinding
     private val viewModel: MemoriesViewModel by viewModels()
     private val adapter = MemoriesAdapter(
-        { if (viewModel.isOnline.value!!) {
-            findNavController().navigate(
-                MemoriesFragmentDirections.actionToMemoryDetails(
-                    it._id!!,
-                    viewModel.isOnline.value!!
+        {
+            if (viewModel.isOnline.value!!) {
+                findNavController().navigate(
+                    MemoriesFragmentDirections.actionToMemoryDetails(
+                        it._id!!,
+                        viewModel.isOnline.value!!
+                    )
                 )
-            )
-        } else {
-            findNavController().navigate(
-                MemoriesFragmentDirections.actionToMemoryDetails(
-                    it.memoryId,
-                    viewModel.isOnline.value!!
+            } else {
+                findNavController().navigate(
+                    MemoriesFragmentDirections.actionToMemoryDetails(
+                        it.memoryId,
+                        viewModel.isOnline.value!!
+                    )
                 )
-            )
-        }
-               },
+            }
+        },
         { viewModel.delete(it) }
     )
 
