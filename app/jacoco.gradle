@@ -5,6 +5,7 @@ project.afterEvaluate {
 
     createDebugCoverageReport.dependsOn testDebug
     connectedAndroidTestDebug.enabled = false
+    setupAndroidReporting()
 }
 
 def setupAndroidReporting() {

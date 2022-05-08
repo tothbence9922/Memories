@@ -7,7 +7,7 @@ import hu.bme.aut.moblab.memories.model.db.Memory
 data class MemoryDTO(
     val _id : String?,
     val memoryId: String,
-    val title: String,
+    var title: String,
     val description: String,
     val imageUrls: String,
     val created: String
