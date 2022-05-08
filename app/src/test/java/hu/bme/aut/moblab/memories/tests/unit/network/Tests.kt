@@ -1,7 +1,6 @@
 package hu.bme.aut.moblab.memories.tests.unit.network
 
 import android.content.Context
-import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

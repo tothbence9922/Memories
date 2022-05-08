@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +15,7 @@ import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.moblab.memories.R
 import hu.bme.aut.moblab.memories.databinding.FragmentAddMemoryBinding
-import hu.bme.aut.moblab.memories.databinding.FragmentMemoryDetailsBinding
 import hu.bme.aut.moblab.memories.viewmodel.AddMemoryViewModel
-import hu.bme.aut.moblab.memories.viewmodel.MemoryDetailsViewModel
-import kotlinx.android.synthetic.main.fragment_add_memory.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddMemoryFragment : Fragment() {

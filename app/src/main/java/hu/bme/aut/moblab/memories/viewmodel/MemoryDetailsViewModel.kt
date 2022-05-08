@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.moblab.memories.bl.offline.GetMemoryByIdUseCase
 import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemoryByIdUseCase
-import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.db.toDto
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 import kotlinx.coroutines.launch

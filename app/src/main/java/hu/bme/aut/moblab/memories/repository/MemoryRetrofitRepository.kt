@@ -1,8 +1,6 @@
 package hu.bme.aut.moblab.memories.repository
 
-import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
-import hu.bme.aut.moblab.memories.model.dto.toMemory
 import hu.bme.aut.moblab.memories.network.MemoriesAPI
 import javax.inject.Inject
 

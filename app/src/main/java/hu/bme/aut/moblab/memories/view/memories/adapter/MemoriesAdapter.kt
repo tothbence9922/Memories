@@ -1,17 +1,14 @@
 package hu.bme.aut.moblab.memories.view.memories.adapter
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import hu.bme.aut.moblab.memories.databinding.MemoryRowBinding
-import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 
 class MemoriesAdapter(

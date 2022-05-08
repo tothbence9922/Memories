@@ -9,7 +9,6 @@ import hu.bme.aut.moblab.memories.bl.offline.DeleteMemoryUseCase
 import hu.bme.aut.moblab.memories.bl.offline.GetMemoriesUseCase
 import hu.bme.aut.moblab.memories.bl.online.RetrofitDeleteMemoryUseCase
 import hu.bme.aut.moblab.memories.bl.online.RetrofitGetMemoriesUseCase
-import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.db.toDto
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 import hu.bme.aut.moblab.memories.model.dto.toMemory

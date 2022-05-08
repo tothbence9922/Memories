@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.moblab.memories.databinding.FragmentMemoryDetailsBinding
-import hu.bme.aut.moblab.memories.view.memories.MemoriesFragmentDirections
 import hu.bme.aut.moblab.memories.viewmodel.MemoryDetailsViewModel
 
 @AndroidEntryPoint

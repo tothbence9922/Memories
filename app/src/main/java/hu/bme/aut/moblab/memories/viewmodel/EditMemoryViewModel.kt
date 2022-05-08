@@ -9,17 +9,12 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.moblab.memories.bl.offline.AddMemoryUseCase
 import hu.bme.aut.moblab.memories.bl.offline.UpdateMemoryUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitAddMemoryUseCase
 import hu.bme.aut.moblab.memories.bl.online.RetrofitUpdateMemoryUseCase
-import hu.bme.aut.moblab.memories.bl.online.RetrofitUpdateMemoryUseCase_Factory
 import hu.bme.aut.moblab.memories.model.db.Memory
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
 import kotlinx.coroutines.launch
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -48,11 +43,17 @@ class EditMemoryViewModel @Inject constructor(
     }
 
     fun putMemory() {
+        var urlString = if (imageUri.value!!.contains("file:")){
+            imageUri.value
+        } else {
+            "file:" + imageUri.value
+        }
+
         val newMemory = Memory(
             originalMemoryId,
             title.value.orEmpty(),
             description.value.orEmpty(),
-            imageUri.value.orEmpty(),
+            urlString,
             originalCreated
         )
         viewModelScope.launch {

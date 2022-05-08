@@ -1,7 +1,6 @@
 package hu.bme.aut.moblab.memories.network
 
 import hu.bme.aut.moblab.memories.model.dto.MemoryDTO
-import retrofit2.Call
 import retrofit2.http.*
 
 interface MemoriesAPI {
