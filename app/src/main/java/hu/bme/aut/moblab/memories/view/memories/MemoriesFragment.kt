@@ -56,6 +56,10 @@ class MemoriesFragment : Fragment() {
         binding.fab.setOnClickListener { view ->
             view.findNavController().navigate(R.id.add_memory)
         }
+
+        binding.fabCrash.setOnClickListener {
+            throw RuntimeException("Test Crash")
+        }
         binding.swOnline.setOnClickListener {
             viewModel.toggleOnline()
         }
